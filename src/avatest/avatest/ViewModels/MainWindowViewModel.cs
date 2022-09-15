@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace avatest.ViewModels
 {
@@ -14,6 +15,10 @@ namespace avatest.ViewModels
     {
         private Window _mainWindow;
         public string Greeting => "Welcome to Avalonia!";
+
+        private bool _scottEnable = false;
+        private bool _oxyEnable = false;
+        private bool _skiaEnable = true;
 
         private string _chineseContent = "你好！我是中文测试！谢谢！TextBox";
         public string ChineseContent
@@ -96,6 +101,27 @@ namespace avatest.ViewModels
             set { this.RaiseAndSetIfChanged(ref _isOxySpectrogram, value); }
         }
 
+        private bool _isSkiaWave;
+        public bool IsSkiaWave
+        {
+            get => _isSkiaWave;
+            set { this.RaiseAndSetIfChanged(ref _isSkiaWave, value); }
+        }
+
+        private bool _isSkiaSpectrum;
+        public bool IsSkiaSpectrum
+        {
+            get => _isSkiaSpectrum;
+            set { this.RaiseAndSetIfChanged(ref _isSkiaSpectrum, value); }
+        }
+
+        private bool _isSkiaSpectrogram;
+        public bool IsSkiaSpectrogram
+        {
+            get => _isSkiaSpectrogram;
+            set { this.RaiseAndSetIfChanged(ref _isSkiaSpectrogram, value); }
+        }
+
         public Action<SpectrumData> SpectrumAddDataAction { get; set; }
         public Action SpectrumClearAction { get; set; }
         public Action<SpectrumData> SpectrogramAddDataAction { get; set; }
@@ -113,11 +139,20 @@ namespace avatest.ViewModels
 
         public Action<WavSampleData> WavSampleAddDataSkiaAction { get; set; }
         public Action WavSampleClearSkiaAction { get; set; }
+        public Action<SpectrumData> SpectrumAddDataSkiaAction { get; set; }
+        public Action SpectrumClearSkiaAction { get; set; }
+        public Action<SpectrumData> SpectrogramAddDataSkiaAction { get; set; }
+        public Action SpectrogramClearSkiaAction { get; set; }
+
 
 
         public MainWindowViewModel(Window mainWindow)
         {
             _mainWindow = mainWindow;
+
+            IsScottSpectrogram = IsScottSpectrum = IsScottWave = _scottEnable;
+            IsOxySpectrogram = IsOxySpectrum = IsOxyWave = _oxyEnable;
+            IsSkiaSpectrogram = IsSkiaSpectrum = IsSkiaWave = _skiaEnable;
         }
 
         public void ShowMessage()
@@ -126,6 +161,25 @@ namespace avatest.ViewModels
             ////msg.Show();
             //msg.ShowDialog(_mainWindow);
         }
+
+        public void EnDisableScott()
+        {
+            _scottEnable = !_scottEnable;
+            IsScottSpectrogram = IsScottSpectrum = IsScottWave = _scottEnable;
+        }
+
+        public void EnDisableOxy()
+        {
+            _oxyEnable = !_oxyEnable;
+            IsOxySpectrogram = IsOxySpectrum = IsOxyWave = _oxyEnable;
+        }
+
+        public void EnDisableSkia()
+        {
+            _skiaEnable = !_skiaEnable;
+            IsSkiaSpectrogram = IsSkiaSpectrum = IsSkiaWave = _skiaEnable;
+        }
+
 
         public void Start()
         {
@@ -194,6 +248,10 @@ namespace avatest.ViewModels
                         if (IsOxySpectrogram)
                             SpectrogramAddDataOxyAction?.Invoke(specData);
 
+                        if (IsSkiaSpectrum)
+                            SpectrumAddDataSkiaAction?.Invoke(specData);
+                        if (IsSkiaSpectrogram)
+                            SpectrogramAddDataSkiaAction?.Invoke(specData);
                         #endregion
 
                         #region Wave Data
@@ -216,7 +274,8 @@ namespace avatest.ViewModels
                         if (IsOxyWave)
                             WavSampleAddDataOxyAction?.Invoke(wavData);
 
-                        WavSampleAddDataSkiaAction?.Invoke(wavData);
+                        if (_isSkiaWave)
+                            WavSampleAddDataSkiaAction?.Invoke(wavData);
                         #endregion
 
                         Thread.Sleep(IntervalMs);
@@ -245,6 +304,8 @@ namespace avatest.ViewModels
             SpectrogramClearOxyAction?.Invoke();
 
             WavSampleClearSkiaAction?.Invoke();
+            SpectrumClearSkiaAction?.Invoke();
+            SpectrogramClearSkiaAction?.Invoke();
         }
 
 

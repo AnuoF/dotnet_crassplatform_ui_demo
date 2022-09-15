@@ -7,7 +7,7 @@ using System.Text;
 
 namespace AvaCharts.Behavoirs
 {
-    public class SpectrumViewOxyBehavoir : Behavior<SpectrumViewOxy>
+    public class SpectrumViewSkiaBehavoir : Behavior<SpectrumViewSkia>
     {
         public Action<SpectrumData> SetDataAction
         {
@@ -15,7 +15,7 @@ namespace AvaCharts.Behavoirs
             set { SetValue(SetDataActionProperty, value); }
         }
         public static readonly StyledProperty<Action<SpectrumData>> SetDataActionProperty =
-            AvaloniaProperty.Register<SpectrumViewOxy, Action<SpectrumData>>(nameof(SetDataAction));
+            AvaloniaProperty.Register<SpectrumViewSkia, Action<SpectrumData>>(nameof(SetDataAction));
 
         public Action<int> AddZoneAction
         {
@@ -23,7 +23,7 @@ namespace AvaCharts.Behavoirs
             set { SetValue(SetDataActionProperty, value); }
         }
         public static readonly StyledProperty<Action<int>> AddZoneActionProperty =
-            AvaloniaProperty.Register<SpectrumViewOxy, Action<int>>(nameof(AddZoneAction));
+            AvaloniaProperty.Register<SpectrumViewSkia, Action<int>>(nameof(AddZoneAction));
 
         public Action ClearAction
         {
@@ -31,7 +31,7 @@ namespace AvaCharts.Behavoirs
             set { SetValue(ClearActionProperty, value); }
         }
         public static readonly StyledProperty<Action> ClearActionProperty =
-            AvaloniaProperty.Register<SpectrumViewOxy, Action>(nameof(ClearAction));
+            AvaloniaProperty.Register<SpectrumViewSkia, Action>(nameof(ClearAction));
 
         protected override void OnAttached()
         {
@@ -41,6 +41,5 @@ namespace AvaCharts.Behavoirs
 
             base.OnAttached();
         }
-
     }
 }

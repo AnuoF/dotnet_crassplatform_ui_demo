@@ -12,10 +12,8 @@ namespace AvaCharts
 {
     public partial class WaveChartViewSkia : UserControl
     {
-        //Our render target we compile everything to and present to the user
         private RenderTargetBitmap RenderTarget;
         private ISkiaDrawingContextImpl SkiaContext;
-
 
         private SKColor _backgroundColor;
         private int _marginTop;
@@ -183,12 +181,18 @@ namespace AvaCharts
         {
             Draw();
             if (RenderTarget != null)
-                context.DrawImage(RenderTarget, new Avalonia.Rect(0, 0, RenderTarget.PixelSize.Width, RenderTarget.PixelSize.Height), new Avalonia.Rect(0, 0, Bounds.Width, Bounds.Height));
+            {
+                context.DrawImage(RenderTarget,
+                    new Avalonia.Rect(0, 0, RenderTarget.PixelSize.Width, RenderTarget.PixelSize.Height),
+                    new Avalonia.Rect(0, 0, Bounds.Width, Bounds.Height));
+            }
         }
 
         private void Draw()
         {
-            if (SkiaContext == null || RenderTarget.PixelSize.Width != (int)Bounds.Width || RenderTarget.PixelSize.Height != (int)Bounds.Height)
+            if (SkiaContext == null
+                || RenderTarget.PixelSize.Width != (int)Bounds.Width
+                || RenderTarget.PixelSize.Height != (int)Bounds.Height)
             {
                 RenderTarget?.Dispose();
                 RenderTarget = null;
@@ -293,7 +297,6 @@ namespace AvaCharts
             }
         }
 
-
         private HandleAreaType CalculateAreaType(Avalonia.Point point)
         {
             // 这里只需要判断是否在Y轴上即可
@@ -305,31 +308,4 @@ namespace AvaCharts
         }
 
     }
-
-    /// <summary>
-    /// 鼠标作用的区域
-    /// </summary>
-    public enum HandleAreaType
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        None,
-
-        /// <summary>
-        /// Y轴
-        /// </summary>
-        YAxis,
-
-        /// <summary>
-        /// X轴
-        /// </summary>
-        XAxis,
-
-        /// <summary>
-        /// 数据区
-        /// </summary>
-        DataArea
-    }
-
 }
