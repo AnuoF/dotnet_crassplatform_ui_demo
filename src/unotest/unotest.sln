@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "unotest.Shared", "unotest\unotest.Shared\unotest.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{9C83E9E6-3B3A-4C57-A226-A51D0DD55FF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unotest.Skia.Gtk", "unotest\unotest.Skia.Gtk\unotest.Skia.Gtk.csproj", "{1657C27C-63A1-4523-B49F-758714DCF0DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "unotest.Skia.Wpf", "unotest\unotest.Skia.Wpf\unotest.Skia.Wpf.csproj", "{2F652A66-67E0-44AC-9015-659828293FE2}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		unotest\unotest.Shared\unotest.Shared.projitems*{1657c27c-63a1-4523-b49f-758714dcf0da}*SharedItemsImports = 5
+		unotest\unotest.Shared\unotest.Shared.projitems*{2f652a66-67e0-44ac-9015-659828293fe2}*SharedItemsImports = 5
+		unotest\unotest.Shared\unotest.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1657C27C-63A1-4523-B49F-758714DCF0DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1657C27C-63A1-4523-B49F-758714DCF0DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1657C27C-63A1-4523-B49F-758714DCF0DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1657C27C-63A1-4523-B49F-758714DCF0DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F652A66-67E0-44AC-9015-659828293FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F652A66-67E0-44AC-9015-659828293FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F652A66-67E0-44AC-9015-659828293FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F652A66-67E0-44AC-9015-659828293FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1657C27C-63A1-4523-B49F-758714DCF0DA} = {9C83E9E6-3B3A-4C57-A226-A51D0DD55FF8}
+		{2F652A66-67E0-44AC-9015-659828293FE2} = {9C83E9E6-3B3A-4C57-A226-A51D0DD55FF8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7E823F1-AD89-4AEF-8AED-4B55FC3477D5}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,26 @@
+
+程序打包发布步骤：
+1.   dotnet restore -r linux-x64
+     dotnet restore -r linux-arm
+
+2.   dotnet deb install
+
+3.   dotnet msbuild avatest.csproj /t:CreateDeb /p:TargetFramework=netcoreapp3.1 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release
+     dotnet msbuild avatest.csproj /t:CreateDeb /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release
+     dotnet msbuild avatest.csproj /t:CreateDeb /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-arm /p:Configuration=Release
+
+部署到Unbuntu的步骤：
+1.  安装全新的Ubuntu20.04版本，然后期间通过Ubuntu系统软件安装VS Code;
+
+2. 下载Qt最新的安装包安装，
+    开始执行./qt-xxx.run提示没权限，需要执行 sudu chmod 775 qt-xxx.run，赋予.run文件可执行权限
+    再次运行.run文件时失败缺少依赖项，安装依赖项后，再次即可正常安装（提示：在安装QT时，先将网络断开，这样就不需要登录注册账户从而安装软件）
+
+3.  安装.net6 sdk，运行我打包的.netcoreapp3.1程序报错；然后就安装.net core 3.1的sdk；
+    System.TypeInitializationException:The type initializer for 'Gdip' thrrow an exception.
+    --->System.PlatformNotSupportedException:System.Drawing.Common is not supported on non-Windows platforms.
+  
+    上面的异常是引用了System.Drawing.Common包的原因。去掉包引用就可以运行程序，前提是需要安装libgdiplus      sudo apt-get install libgdiplus
+    上面那个异常，需要将System.Drawing.Common的包从6.0.0降到5.0.0。为啥需要引用此包？因ScottPlot的坐标轴显示问题。
+
+

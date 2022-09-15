@@ -1,0 +1,12 @@
+        1. PlotBase.cs
+        protected override void OnPointerEnter(PointerEventArgs e)  -> protected override void OnPointerEntered(PointerEventArgs e)
+        protected override void OnPointerLeave(PointerEventArgs e)  -> protected override void OnPointerExited(PointerEventArgs e)
+
+        2. Axis.cs
+        protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> e)  -> protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
+
+        3. CanvasRenderContext.cs
+        global::Avalonia.Visuals.Media.Imaging.BitmapInterpolationMode.Default   -> BitmapInterpolationMode.Default
+
+        4. Series.cs
+        public static class WeakSubscriptionManager

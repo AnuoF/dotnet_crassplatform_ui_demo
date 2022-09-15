@@ -1,0 +1,261 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:avatest.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+		xmlns:avaChart="clr-namespace:AvaCharts;assembly=AvaCharts"
+		xmlns:behavoir="clr-namespace:AvaCharts.Behavoirs;assembly=AvaCharts"
+        mc:Ignorable="d"
+		d:DesignWidth="800"
+		d:DesignHeight="450"
+        x:Class="avatest.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Avaloia框架测试程序 demo">
+
+	<!--xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"-->
+
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Grid ShowGridLines="True">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!-- Tool bar -->
+		<StackPanel Grid.Row="0"
+					Orientation="Horizontal">
+			<Button Command="{Binding ShowMessage}">MessageBox 按钮</Button>
+
+			<TextBlock Text="数据间隔(ms)"
+					   VerticalAlignment="Center"/>
+			<TextBox Width="60"
+					 Height="30"
+					 VerticalAlignment="Center"
+					 Text="{Binding IntervalMs}"/>
+
+			<Button Command="{Binding Start}"
+					Margin="10,0,0,0"
+					IsEnabled="{Binding !IsStarted}">开始</Button>
+
+			<Button Command="{Binding Stop}"
+					Margin="10,0,0,0"
+					IsEnabled="{Binding IsStarted}">停止</Button>
+
+			<Button Command="{Binding Clear}" Margin="10,0,0,0">清空</Button>
+
+			<TextBlock Text="频谱点数:"
+					   Margin="10,0,0,0"
+					   VerticalAlignment="Center"/>
+			<TextBox Text="{Binding DataLength, Mode=TwoWay}"
+					 Height="30"/>
+			<!--Visibility="Collapsed"-->
+
+			<TextBlock Text="瀑布图高度:"
+					   Margin="10,0,0,0"
+					   VerticalAlignment="Center"/>
+			<TextBox Text="{Binding DisplayDataLength, Mode=TwoWay}"
+					 Height="30"/>
+
+			<Border BorderBrush="Green"
+					Margin="20,0,10,0"
+					Width="2"
+					BorderThickness="1"/>
+
+			<Border BorderBrush="Blue"
+					BorderThickness="1">
+				<StackPanel Orientation="Vertical"
+							Margin="5,0,0,0">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="ScottPlot"
+								   Width="60"
+								   VerticalAlignment="Center"
+								   Foreground="Blue"/>
+						<CheckBox IsChecked="{Binding IsScottWave}"
+								Margin="5,0,0,0"
+								Content="Wave"/>
+						<CheckBox IsChecked="{Binding IsScottSpectrum}"
+									Margin="5,0,0,0"
+									Content="Spectrum"/>
+						<CheckBox IsChecked="{Binding IsScottSpectrogram}"
+									Margin="5,0,0,0"
+									Content="Spectrogram"/>
+					</StackPanel>
+
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="OxyPlot"
+								   Width="60"
+								   VerticalAlignment="Center"
+								   Foreground="Blue"/>
+						<CheckBox IsChecked="{Binding IsOxyWave}"
+									Margin="5,0,0,0"
+									Content="Wave"/>
+						<CheckBox IsChecked="{Binding IsOxySpectrum}"
+									Margin="5,0,0,0"
+									Content="Spectrum"/>
+						<CheckBox IsChecked="{Binding IsOxySpectrogram}"
+									Margin="5,0,0,0"
+									Content="Spectrogram"/>
+					</StackPanel>
+				</StackPanel>
+			</Border>
+
+			<TextBox Text="{Binding ChineseContent}"
+					 Margin="5,0,0,0"
+					 VerticalAlignment="Center"
+					 FontFamily="Microsoft YaHei,Simsun,Noto Sans CJK SC,苹方-简,宋体-简"
+					 Foreground="Red"/>
+
+		</StackPanel>
+
+		<TabControl Grid.Row="1">
+			<TabItem Header="ScottPlot">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<!-- Wave Chart -->
+					<Border Grid.Row="0">
+						<avaChart:WaveChartView>
+							<i:Interaction.Behaviors>
+								<behavoir:WaveChartViewBehavior SetDataAction="{Binding WavSampleAddDataAction, Mode=OneWayToSource}"
+																ClearDataAction="{Binding WavSampleClearAction, Mode=OneWayToSource}"/>
+							</i:Interaction.Behaviors>
+						</avaChart:WaveChartView>
+					</Border>
+
+					<GridSplitter Grid.Row="1"
+								  Background="Gray"
+								  ResizeDirection="Rows"/>
+
+					<!-- Spectrum Chart -->
+					<Border Grid.Row="2">
+						<avaChart:SpectrumView>
+							<i:Interaction.Behaviors>
+								<behavoir:SpectrumViewBehavoir SetDataAction="{Binding SpectrumAddDataAction, Mode=OneWayToSource}"
+															   ClearAction="{Binding SpectrumClearAction, Mode=OneWayToSource}"/>
+							</i:Interaction.Behaviors>
+						</avaChart:SpectrumView>
+					</Border>
+
+					<GridSplitter Grid.Row="3"
+								  Background="Gray"
+								  ResizeDirection="Rows"/>
+
+					<!-- Spectrogram Chart -->
+					<Border Grid.Row="4">
+						<avaChart:SpectrogramView x:Name="DeviceSpectrumView"
+												  DisplayDataLength="{Binding DisplayDataLength, Mode=TwoWay}">
+							<i:Interaction.Behaviors>
+								<behavoir:SpectrogramViewBehavoir SetDataAction="{Binding SpectrogramAddDataAction, Mode=OneWayToSource}"
+																  ClearAction="{Binding SpectrogramClearAction, Mode=OneWayToSource}"/>
+							</i:Interaction.Behaviors>
+						</avaChart:SpectrogramView>
+					</Border>
+				</Grid>
+			</TabItem>
+
+			<TabItem Header="OxyPlot">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<!-- Wave Chart -->
+					<Border Grid.Row="0">
+						<avaChart:WaveChartViewOxy>
+							<i:Interaction.Behaviors>
+								<behavoir:WaveChartViewOxyBehavoir SetDataAction="{Binding WavSampleAddDataOxyAction, Mode=OneWayToSource}"
+																   ClearDataAction="{Binding WavSampleClearOxyAction, Mode=OneWayToSource}"/>
+							</i:Interaction.Behaviors>
+						</avaChart:WaveChartViewOxy>
+					</Border>
+
+					<GridSplitter Grid.Row="1"
+								  Background="Gray"
+								  ResizeDirection="Rows"/>
+
+					<!-- Spectrum Chart -->
+					<Border Grid.Row="2">
+						<avaChart:SpectrumViewOxy>
+							<i:Interaction.Behaviors>
+								<behavoir:SpectrumViewOxyBehavoir SetDataAction="{Binding SpectrumAddDataOxyAction, Mode=OneWayToSource}"
+															      ClearAction="{Binding SpectrumClearOxyAction, Mode=OneWayToSource}"/>
+							</i:Interaction.Behaviors>
+						</avaChart:SpectrumViewOxy>
+					</Border>
+
+					<GridSplitter Grid.Row="3"
+								  Background="Gray"
+								  ResizeDirection="Rows"/>
+
+					<!-- Spectrogram Chart -->
+					<Border Grid.Row="4">
+						<avaChart:SpectrogramViewOxy x:Name="DeviceSpectrumViewOxy"
+													 DisplayDataLength="{Binding DisplayDataLength, Mode=TwoWay}">
+							<i:Interaction.Behaviors>
+								<behavoir:SpectrogramViewOxyBehavoir SetDataAction="{Binding SpectrogramAddDataOxyAction, Mode=OneWayToSource}"
+																     ClearAction="{Binding SpectrogramClearOxyAction, Mode=OneWayToSource}"/>
+							</i:Interaction.Behaviors>
+						</avaChart:SpectrogramViewOxy>
+					</Border>
+				</Grid>
+			</TabItem>
+
+			<TabItem Header="SkiaSharp">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<!--Wave Chart-->
+					<Border Grid.Row="0">
+						<avaChart:WaveChartViewSkia>
+							<i:Interaction.Behaviors>
+								<behavoir:WaveChartViewSkiaBehavoir SetDataAction="{Binding WavSampleAddDataSkiaAction, Mode=OneWayToSource}"
+																    ClearDataAction="{Binding WavSampleClearSkiaAction, Mode=OneWayToSource}"/>
+							</i:Interaction.Behaviors>
+						</avaChart:WaveChartViewSkia>
+					</Border>
+
+					<GridSplitter Grid.Row="1"
+							  Background="Gray"
+							  ResizeDirection="Rows"/>
+
+					<!-- Spectrum Chart -->
+					<Border Grid.Row="2">
+
+					</Border>
+
+					<GridSplitter Grid.Row="3"
+								  Background="Gray"
+								  ResizeDirection="Rows"/>
+
+					<!-- Spectrogram Chart -->
+					<Border Grid.Row="4">
+
+					</Border>
+				</Grid>
+
+			</TabItem>
+		</TabControl>
+
+	</Grid>
+</Window>

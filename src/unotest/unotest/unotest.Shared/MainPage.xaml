@@ -1,0 +1,74 @@
+﻿<Page x:Class="unotest.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:unotest"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:unotest.ViewModels"
+      xmlns:behav="using:unotest.Behavoirs"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Tool bar-->
+        <Border Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="startButton"
+                        x:Uid="startButton"
+                        Content="Start 开始"
+                        Click="StartButton_Click"
+                        Command="{x:Bind MainVM.StartCommand}"
+                        FontFamily="Microsoft YaHei" />
+                <Button x:Name="stopButton"
+                        x:Uid="stopButton"
+                        Content="Stop 停止"
+                        Click="StopButton_Click"
+                        FontFamily="Microsoft YaHei"
+                        Command="{x:Bind MainVM.StopCommand}" />
+                <Button x:Name="clearButton"
+                        x:Uid="clearButton"
+                        Content="Clear 清空"
+                        Click="ClearButton_Click"
+                        FontFamily="Microsoft YaHei"
+                        Command="{x:Bind MainVM.ClearCommand}" />
+
+                <TextBox x:Name="intervalTextBox"
+                         Text="{x:Bind MainVM.IntervalMs, Mode=TwoWay}" />
+
+            </StackPanel>
+        </Border>
+
+        <!-- Wave chart-->
+        <Border Grid.Row="1">
+            <local:WaveChartViewOxy x:Name="waveChartOxy">
+                <interactivity:Interaction.Behaviors>
+                    <behav:WaveChartViewOxyBehavoir SetDataAction="{x:Bind MainVM.WavSampleAddDataOxyAction, Mode=OneWay}"
+                                                    ClearDataAction="{x:Bind MainVM.WavSampleClearOxyAction, Mode=OneWay}" />
+                </interactivity:Interaction.Behaviors>
+            </local:WaveChartViewOxy>
+        </Border>
+
+        <!--Spectrum Chart-->
+        <Border Grid.Row="3">
+            <local:SpectrumViewOxy x:Name="spectrumOxy">
+
+            </local:SpectrumViewOxy>
+        </Border>
+
+        <!--  dotnet msbuild unotest.Skia.Gtk.csproj /t:CreateDeb /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release  -->
+        <!--Spectrogram Chart-->
+        <Border Grid.Row="5">
+
+        </Border>
+    </Grid>
+</Page>

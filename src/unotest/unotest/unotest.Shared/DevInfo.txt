@@ -1,0 +1,5 @@
+        
+±àÒë´ò°üµ½Ubuntu:
+        dotnet restore -r linux-x64
+        dotnet deb install
+        dotnet msbuild unotest.Skia.Gtk.csproj /t:CreateDeb /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release

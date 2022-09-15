@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:oxy="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
+             x:Class="AvaCharts.WaveChartViewOxy">
+
+
+	<UserControl.Styles>
+		<StyleInclude Source="resm:OxyPlot.Avalonia.Themes.Default.xaml?assembly=OxyPlot.Avalonia"/>
+	</UserControl.Styles>
+
+	<Grid x:Name="gridChart"
+		  Margin="10">
+
+		<!--<oxy:Plot
+				  PlotMargins="30 0 0 30"
+				  PlotAreaBorderColor="Blue">
+			<oxy:Plot.Series>
+				<oxy:AreaSeries
+					DataFieldX="Index"
+					DataFieldY="Value"
+					Items="{Binding Path=Values}"
+					Color="#fd6d00" />
+			</oxy:Plot.Series>
+		</oxy:Plot>-->
+	</Grid>
+</UserControl>

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "avatest", "avatest\avatest.csproj", "{1759BD21-2EE1-4716-9720-280D69496CA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaCharts", "AvaCharts\AvaCharts.csproj", "{C7BF274A-181F-45B6-8FEB-1DA04308AB3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OxyPlot.Avalonia", "OxyPlot.Avalonia\OxyPlot.Avalonia.csproj", "{793A2410-49F5-4DC8-8995-376E420BA698}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1759BD21-2EE1-4716-9720-280D69496CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1759BD21-2EE1-4716-9720-280D69496CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1759BD21-2EE1-4716-9720-280D69496CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1759BD21-2EE1-4716-9720-280D69496CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7BF274A-181F-45B6-8FEB-1DA04308AB3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7BF274A-181F-45B6-8FEB-1DA04308AB3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7BF274A-181F-45B6-8FEB-1DA04308AB3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7BF274A-181F-45B6-8FEB-1DA04308AB3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{793A2410-49F5-4DC8-8995-376E420BA698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793A2410-49F5-4DC8-8995-376E420BA698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793A2410-49F5-4DC8-8995-376E420BA698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793A2410-49F5-4DC8-8995-376E420BA698}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10E46CEB-BBF2-47EF-8DF2-7E1C27C26C13}
+	EndGlobalSection
+EndGlobal

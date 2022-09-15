@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=avascottplot
+Type=Application
+Exec=/usr/share/avascottplot/avascottplot
+Icon=/usr/share/icons/avascottplot.png
